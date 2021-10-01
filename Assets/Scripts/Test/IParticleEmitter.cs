@@ -1,7 +1,6 @@
 ﻿namespace Eden.Test
 {
 	using UnityEngine;
-	using UnityEngine.Assertions;
 
 	public abstract class IParticleEmitter : MonoBehaviour
 	{
@@ -9,37 +8,49 @@
 
 		protected virtual void OnEnable()
 		{
-			Assert.IsTrue(TryRegisterEmitter());
+			try
+            {
+				TryRegisterEmitter();
+			}
+			catch (FailedToRegisterEmitterException exception)
+			{
+				Debug.LogError(exception.Message);
+            }
 		}
 
 		protected virtual void OnDisable()
 		{
-			TryUnregisterEmitter();
+			try
+			{
+				TryUnregisterEmitter();
+			}
+			catch (FailedToUnregisterEmitterException exception)
+			{
+				Debug.LogError(exception.Message);
+			}
 		}
 
-		private bool TryRegisterEmitter()
+		private void TryRegisterEmitter()
 		{
 			if (Main.Instance != null)
 			{
 				Main.Instance.RegisterEmitter(this);
-				return true;
 			}
 			else
 			{
-				return false;
+				throw new FailedToRegisterEmitterException();
 			}
 		}
 
-		private bool TryUnregisterEmitter()
+		private void TryUnregisterEmitter()
 		{
 			if (Main.Instance != null)
 			{
 				Main.Instance.UnregisterEmitter(this);
-				return true;
 			}
 			else
 			{
-				return false;
+				throw new FailedToUnregisterEmitterException();
 			}
 		}
 	}
