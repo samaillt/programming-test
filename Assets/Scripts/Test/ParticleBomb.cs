@@ -23,7 +23,7 @@
 		{
 			for (int i = 0; i < _particleCount; i++)
 			{
-				Vector3 v = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0.0f);
+				Vector3 v = Random.insideUnitCircle; // Note : only v.X and v.Y coordinates will be set with a value [-1; 1]
 				Particle p = Instantiate(_particlePrefab);
 				p.Init(2.0f, Color.Lerp(_startColor, _endColor, Random.value), v * Random.Range(_speedMin, _speedMax), _deceleration);
 				p.transform.SetParent(transform, false);
