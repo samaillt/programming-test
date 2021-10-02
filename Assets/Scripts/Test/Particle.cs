@@ -1,4 +1,4 @@
-﻿namespace Eden.Test
+namespace Eden.Test
 {
 	using UnityEngine;
 	using UnityEngine.UI;
@@ -42,10 +42,15 @@
 			gameObject.SetActive(false);
 		}
 
+		public void ResetLocalPosition()
+		{
+			transform.localPosition = Vector3.zero;
+		}
+
 		private void Update()
 		{
 			_lifespan -= Time.deltaTime;
-			transform.position = transform.position + _speed * Time.deltaTime;
+			transform.localPosition = transform.localPosition + _speed * Time.deltaTime;
 			_speed -= _speed * _deceleration * Time.deltaTime;
 
 			UpdateColor();

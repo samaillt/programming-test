@@ -1,4 +1,4 @@
-﻿namespace Eden.Test
+namespace Eden.Test
 {
 	using System.Collections.Generic;
 	using UnityEngine;
@@ -39,15 +39,15 @@
 				if (_liveParticles[i].IsDead())
 				{
 					Particle deadParticle = _liveParticles[i];
+					ParticlePool.Instance.AddParticleToPool(deadParticle);
 					_liveParticles.RemoveAt(i);
-					deadParticle.Hide();
 				}
 			}
 		}
 
 		private void SpawnParticle()
 		{
-			Particle newParticle = Instantiate(_particlePrefab);
+			Particle newParticle = ParticlePool.Instance.SpawnParticle();
 
 			float life = Random.Range(_particleLifeMin, _particleLifeMax);
 			Color color = Random.ColorHSV();
