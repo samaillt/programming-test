@@ -18,11 +18,15 @@ namespace Eden.Test
 		{
 			for (int i = 0; i < _particleCount; i++)
 			{
-				Vector3 v = Random.insideUnitCircle; // Note : only v.X and v.Y coordinates will be set with a value [-1; 1]
-				Particle p = ParticlePool.Instance.SpawnParticle();
-				p.Init(2.0f, Color.Lerp(_startColor, _endColor, Random.value), v * Random.Range(_minVelocity, _maxVelocity), _deceleration);
-				p.transform.SetParent(transform, false);
-				_liveParticles.Add(p);
+				Vector3 particleDirection = Random.insideUnitCircle; // Note : only particleVelocity.X and particleVelocity.Y coordinates will be set with a value [-1; 1]
+				Particle particle = ParticlePool.Instance.SpawnParticle();
+				float particleLifespan = 2f;
+				Color particleInitialColor = Color.Lerp(_startColor, _endColor, Random.value);
+				Vector3 particleInitialVelocity = particleDirection * Random.Range(_minVelocity, _maxVelocity);
+
+				particle.Init(particleLifespan, particleInitialColor, particleInitialVelocity, _deceleration);
+				particle.transform.SetParent(transform, false);
+				_liveParticles.Add(particle);
 			}
 		}
 		#endregion Methods
