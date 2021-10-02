@@ -1,6 +1,6 @@
 namespace Eden.Test
 {
-	using UnityEngine;
+    using UnityEngine;
 	using UnityEngine.UI;
 
 	public class Particle : MonoBehaviour
@@ -8,6 +8,7 @@ namespace Eden.Test
 		#region Fields
 		[SerializeField] private float _colorChangeDurationMin = 0.3f;
 		[SerializeField] private float _colorChangeDurationMax = 1.5f;
+		[SerializeField] private float _fadeOutDuration = 1.0f;
 		[SerializeField] private SpriteRenderer _sprite;
 
 		private Vector3 _speed = Vector3.zero;
@@ -63,24 +64,45 @@ namespace Eden.Test
 
 		private void UpdateColor()
 		{
-			if (_changeColor == false)
+			if (_sprite == null)
 			{
 				return;
 			}
 
-			if (_colorChangeTime > _colorChangeDuration)
-			{
-				_previousColor = _nextColor;
-				_nextColor = Random.ColorHSV();
-				_colorChangeTime -= _colorChangeDuration;
-			}
+			if (_changeColor == true)
+            {
+				if (_colorChangeTime > _colorChangeDuration)
+				{
+					_previousColor = _nextColor;
+					_nextColor = Random.ColorHSV();
+					_colorChangeTime -= _colorChangeDuration;
+				}
 
-			if (_sprite != null)
-			{
+				TryUpdateAlphaIfFadingOut(ref _nextColor);
+
 				_sprite.color = Color.Lerp(_previousColor, _nextColor, _colorChangeTime / _colorChangeDuration);
-			}
 
-			_colorChangeTime += Time.deltaTime;
+				_colorChangeTime += Time.deltaTime;
+			}
+			else
+			{
+				Color color = new Color(_sprite.color.r, _sprite.color.g, _sprite.color.b, _sprite.color.a);
+				if (TryUpdateAlphaIfFadingOut(ref color))
+                {
+					_sprite.color = color;
+				}
+			}
+		}
+
+		private bool TryUpdateAlphaIfFadingOut(ref Color color)
+        {
+			if (_lifespan <= _fadeOutDuration)
+			{
+				float alpha = color.a;
+				color.a = Mathf.Lerp(0, alpha, _lifespan / _fadeOutDuration);
+				return true;
+			}
+			return false;
 		}
 		#endregion Methods
 	}
