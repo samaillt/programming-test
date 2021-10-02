@@ -5,7 +5,7 @@
 
 	public class ParticleBomb : IParticleEmitter
 	{
-
+		#region Fields
 		[SerializeField] private int _particleCount = 100;
 		[SerializeField] private Particle _particlePrefab = null;
 		[SerializeField] private float _deceleration = 10.0f;
@@ -16,9 +16,13 @@
 		[SerializeField] private Color _endColor = Color.red;
 
 		public List<Particle> _liveParticles = new List<Particle>();
+		#endregion Fields
 
+		#region Properties
 		public override int ParticleCount { get { return _liveParticles.Count; } }
+		#endregion Properties
 
+		#region Methods
 		public void Explode()
 		{
 			for (int i = 0; i < _particleCount; i++)
@@ -43,5 +47,6 @@
 				}
 			}
 		}
+		#endregion Methods
 	}
 }
