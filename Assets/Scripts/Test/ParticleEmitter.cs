@@ -39,6 +39,7 @@ namespace Eden.Test
 				if (_liveParticles[i].IsDead())
 				{
 					Particle deadParticle = _liveParticles[i];
+					deadParticle.Hide();
 					ParticlePool.Instance.AddParticleToPool(deadParticle);
 					_liveParticles.RemoveAt(i);
 				}

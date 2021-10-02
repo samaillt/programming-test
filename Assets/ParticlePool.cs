@@ -32,6 +32,7 @@ namespace Eden.Test
             for (int i = 0; i < _particlePoolInfos._poolSize; i++)
             {
                 Particle particle = Instantiate(_particlePoolInfos._particlePrefab);
+                particle.gameObject.SetActive(false);
                 AddParticleToPool(particle);
             }
         }
@@ -54,7 +55,6 @@ namespace Eden.Test
         public void AddParticleToPool(Particle particle)
         {
             particle.transform.SetParent(transform, false);
-            particle.Hide();
             particle.ResetLocalPosition();
             _particlePool.Enqueue(particle);
         }
