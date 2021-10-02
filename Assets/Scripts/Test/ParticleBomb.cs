@@ -7,7 +7,6 @@
 	{
 		#region Fields
 		[SerializeField] private int _particleCount = 100;
-		[SerializeField] private Particle _particlePrefab = null;
 		[SerializeField] private float _deceleration = 10.0f;
 		[SerializeField] private float _speedMin = 600.0f;
 

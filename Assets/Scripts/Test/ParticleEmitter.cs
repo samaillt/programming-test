@@ -9,7 +9,6 @@ namespace Eden.Test
 		[SerializeField] private float _particleLifeMin = 3.0f;
 		[SerializeField] private float _particleLifeMax = 9.0f;
 		[SerializeField] private float _particlesBySec = 10;
-		[SerializeField] private Particle _particlePrefab = null;
 		[SerializeField] private float _maxAngle = 30.0f;
 		[SerializeField] private float _particleSpeedMin = 10.0f;
 		[SerializeField] private float _particleSpeedMax = 10.0f;
