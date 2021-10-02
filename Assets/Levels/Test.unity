@@ -1102,7 +1102,7 @@ MonoBehaviour:
   _particlePoolInfos:
     _particlePrefab: {fileID: 114601819482752776, guid: b5df2edaa5a4b224eb3faec7a0b98c84,
       type: 3}
-    _poolSize: 15000
+    _poolSize: 3000
 --- !u!4 &1673506392
 Transform:
   m_ObjectHideFlags: 0
