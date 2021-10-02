@@ -16,9 +16,9 @@
 		[SerializeField] private Color _startColor = Color.yellow;
 		[SerializeField] private Color _endColor = Color.red;
 
-		public List<Particle> _liveParticles = new List<Particle>();
+		// public List<Particle> _liveParticles = new List<Particle>();
 
-		public override int ParticleCount { get { return _liveParticles.Count; } }
+		// public override int ParticleCount { get { return _liveParticles.Count; } }
 
 		public void Explode()
 		{
@@ -32,7 +32,7 @@
 			}
 		}
 
-		public void Update()
+		/*public void Update()
 		{
 			for (int i = 0; i < _liveParticles.Count; i++)
 			{
@@ -42,6 +42,6 @@
 					_liveParticles.RemoveAt(i--);
 				}
 			}
-		}
+		}*/
 	}
 }

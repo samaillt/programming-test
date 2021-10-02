@@ -46,7 +46,18 @@
 			StartCoroutine(UpdateInfo(1.0f));
 		}
 
-		private IEnumerator UpdateInfo(float refreshInterval)
+        private void FixedUpdate()
+        {
+			if (Input.GetKeyDown(KeyCode.K))
+			{
+				foreach (IParticleEmitter emitter in _emitters)
+				{
+					emitter.KillHalfParticles();
+				}
+			}
+        }
+
+        private IEnumerator UpdateInfo(float refreshInterval)
 		{
 			float time = refreshInterval;
 			while (true)

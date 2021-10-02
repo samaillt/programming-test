@@ -14,16 +14,11 @@ namespace Eden.Test
 		[SerializeField] private float _particleSpeedMax = 10.0f;
 		[SerializeField] private float _deceleration = 10.0f;
 
-		private List<Particle> _liveParticles = new List<Particle>();
 		private float _particlesToSpawn = 0.0f;
 		#endregion Fields
 
-		#region Properties
-		public override int ParticleCount { get { return _liveParticles.Count; } }
-		#endregion Properties
-
 		#region Methods
-		protected void Update()
+		protected override void Update()
 		{
 			_particlesToSpawn += _particlesBySec * Time.deltaTime;
 
@@ -33,16 +28,7 @@ namespace Eden.Test
 				_particlesToSpawn -= 1.0f;
 			}
 
-			for (int i = 0; i < _liveParticles.Count; i++)
-			{
-				if (_liveParticles[i].IsDead())
-				{
-					Particle deadParticle = _liveParticles[i];
-					deadParticle.Hide();
-					ParticlePool.Instance.AddParticleToPool(deadParticle);
-					_liveParticles.RemoveAt(i);
-				}
-			}
+			base.Update();
 		}
 
 		private void SpawnParticle()

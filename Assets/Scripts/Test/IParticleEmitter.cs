@@ -1,10 +1,13 @@
 ﻿namespace Eden.Test
 {
-	using UnityEngine;
+    using System.Collections.Generic;
+    using UnityEngine;
 
 	public abstract class IParticleEmitter : MonoBehaviour
 	{
-		public abstract int ParticleCount { get; }
+		public int ParticleCount { get { return _liveParticles.Count; } }
+
+		public List<Particle> _liveParticles = new List<Particle>();
 
 		protected virtual void OnEnable()
 		{
@@ -30,6 +33,26 @@
 			}
 		}
 
+		protected virtual void Update()
+        {
+			for (int i = 0; i < _liveParticles.Count; i++)
+			{
+				if (_liveParticles[i].IsDead())
+				{
+					KillParticleAtIndex(i);
+				}
+			}
+		}
+
+		public void KillHalfParticles()
+		{
+			int particleCount = _liveParticles.Count;
+			for (int i = particleCount - 1; i >= particleCount / 2; i--)
+			{
+				KillParticleAtIndex(i);
+			}
+		}
+
 		private void TryRegisterEmitter()
 		{
 			if (Main.Instance != null)
@@ -52,6 +75,14 @@
 			{
 				throw new FailedToUnregisterEmitterException();
 			}
+		}
+
+		private void KillParticleAtIndex(int index)
+		{
+			Particle deadParticle = _liveParticles[index];
+			deadParticle.Hide();
+			ParticlePool.Instance.AddParticleToPool(deadParticle);
+			_liveParticles.RemoveAt(index);
 		}
 	}
 }
