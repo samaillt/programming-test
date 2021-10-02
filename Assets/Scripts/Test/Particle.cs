@@ -11,7 +11,8 @@ namespace Eden.Test
 		[SerializeField] private float _fadeOutDuration = 1.0f;
 		[SerializeField] private SpriteRenderer _sprite;
 
-		private Vector3 _speed = Vector3.zero;
+		private Vector3 _velocity = Vector3.zero;
+		private Vector3 _gravitationalVelocity = Vector3.zero;
 		private float _lifespan = 0.0f;
 		private float _colorChangeTime = 0.0f;
 		private float _colorChangeDuration = 1.0f;
@@ -19,16 +20,19 @@ namespace Eden.Test
 		private Color _nextColor = Color.white;
 		private float _deceleration = 0.0f;
 		private bool _changeColor = false;
+
+		private float GRAVITY_CONSTANT = 9.81f;
 		#endregion Fields
 
 		#region Methods
-		public void Init(float lifespan, Color color, Vector3 initialSpeed, float deceleration, bool changeColor = false)
+		public void Init(float lifespan, Color color, Vector3 initialVelocity, float deceleration, bool changeColor = false)
 		{
 			_lifespan = lifespan;
 			_sprite.color = color;
 			_previousColor = color;
 			_colorChangeDuration = Random.Range(_colorChangeDurationMin, _colorChangeDurationMax);
-			_speed = initialSpeed;
+			_velocity = initialVelocity;
+			_gravitationalVelocity = Vector3.zero;
 			_deceleration = deceleration;
 			_changeColor = changeColor;
 		}
@@ -51,8 +55,9 @@ namespace Eden.Test
 		private void Update()
 		{
 			_lifespan -= Time.deltaTime;
-			transform.localPosition = transform.localPosition + _speed * Time.deltaTime;
-			_speed -= _speed * _deceleration * Time.deltaTime;
+			_gravitationalVelocity += Vector3.down * GRAVITY_CONSTANT * Time.deltaTime;
+			transform.localPosition = transform.localPosition + _gravitationalVelocity * Time.deltaTime + _velocity * Time.deltaTime;
+			_velocity -= _velocity * _deceleration * Time.deltaTime;
 
 			UpdateColor();
 		}
