@@ -8,6 +8,7 @@ namespace Eden.Test
 		#region Fields
 		[SerializeField] private float _colorChangeDurationMin = 0.3f;
 		[SerializeField] private float _colorChangeDurationMax = 1.5f;
+		[SerializeField] private SpriteRenderer _sprite;
 
 		private Vector3 _speed = Vector3.zero;
 		private float _lifespan = 0.0f;
@@ -23,8 +24,7 @@ namespace Eden.Test
 		public void Init(float lifespan, Color color, Vector3 initialSpeed, float deceleration, bool changeColor = false)
 		{
 			_lifespan = lifespan;
-			SpriteRenderer sprite = GetComponentInChildren<SpriteRenderer>();
-			sprite.color = color;
+			_sprite.color = color;
 			_previousColor = color;
 			_colorChangeDuration = Random.Range(_colorChangeDurationMin, _colorChangeDurationMax);
 			_speed = initialSpeed;
@@ -75,9 +75,9 @@ namespace Eden.Test
 				_colorChangeTime -= _colorChangeDuration;
 			}
 
-			if (GetComponentInChildren<SpriteRenderer>() != null)
+			if (_sprite != null)
 			{
-				GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(_previousColor, _nextColor, _colorChangeTime / _colorChangeDuration);
+				_sprite.color = Color.Lerp(_previousColor, _nextColor, _colorChangeTime / _colorChangeDuration);
 			}
 
 			_colorChangeTime += Time.deltaTime;
