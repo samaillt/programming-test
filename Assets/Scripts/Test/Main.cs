@@ -47,7 +47,7 @@
 			StartCoroutine(UpdateInfo(_pannelRefreshInterval));
 		}
 
-        private void FixedUpdate()
+        private void Update()
         {
 			if (Input.GetKeyDown(KeyCode.K))
 			{
