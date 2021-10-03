@@ -7,7 +7,6 @@
 	{
 		[SerializeField] private float _spawnIntervalMin = 1.0f;
 		[SerializeField] private float _spawnIntervalMax = 4.0f;
-		[SerializeField] private ParticleBomb _bombPrefab = null;
 		[SerializeField] private Transform _bombAnchor = null;
 
 		private void Start()
@@ -26,16 +25,18 @@
 				time += Time.deltaTime;
 			}
 
-			Vector3 position = new Vector3(
-				Random.Range(-50.0f, 50.0f),
-				Random.Range(-50.0f, 50.0f),
-				0.0f);
+			ParticleBomb bomb;
+			if (ObjectPooler.Instance.TrySpawnParticleBomb(out bomb))
+            {
+				Vector3 position = new Vector3(
+					Random.Range(-50.0f, 50.0f),
+					Random.Range(-50.0f, 50.0f),
+					0.0f);
 
-			ParticleBomb bomb = Instantiate(_bombPrefab);
-			bomb.transform.SetParent(_bombAnchor, false);
-			bomb.transform.position = position;
-			bomb.Explode();
-
+				bomb.transform.SetParent(_bombAnchor, false);
+				bomb.transform.position = position;
+				bomb.Explode();
+			}
 			float newDelay = Random.Range(_spawnIntervalMin, _spawnIntervalMax);
 			StartCoroutine(SpawnNextBomb(newDelay));
 		}

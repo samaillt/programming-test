@@ -32,26 +32,32 @@ namespace Eden.Test
 
 		private void SpawnParticle()
 		{
-			Particle newParticle = ParticlePool.Instance.SpawnParticle();
+			Particle newParticle;
+			if (ObjectPooler.Instance.TrySpawnParticle(out newParticle))
+            {
+				float life = Random.Range(_particleLifeMin, _particleLifeMax);
+				Color color = Random.ColorHSV();
 
-			float life = Random.Range(_particleLifeMin, _particleLifeMax);
-			Color color = Random.ColorHSV();
+				Quaternion max = Quaternion.Euler(0.0f, 0.0f, _maxAngle);
+				Quaternion min = Quaternion.Euler(0.0f, 0.0f, -_maxAngle);
 
-			Quaternion max = Quaternion.Euler(0.0f, 0.0f, _maxAngle);
-			Quaternion min = Quaternion.Euler(0.0f, 0.0f, -_maxAngle);
+				Vector3 maxVector = max * transform.up;
+				Vector3 minVector = min * transform.up;
 
-			Vector3 maxVector = max * transform.up;
-			Vector3 minVector = min * transform.up;
+				Vector3 result = Vector3.Lerp(minVector, maxVector, Random.value);
 
-			Vector3 result = Vector3.Lerp(minVector, maxVector, Random.value);
+				float particleSpeed = Random.Range(_particleMinVelocity, _particleMaxVelocity);
+				Vector3 velocity = result * particleSpeed;
 
-			float particleSpeed = Random.Range(_particleMinVelocity, _particleMaxVelocity);
-			Vector3 velocity = result * particleSpeed;
+				newParticle.Init(life, color, velocity, _deceleration, true);
+				newParticle.transform.SetParent(transform, false);
 
-			newParticle.Init(life, color, velocity, _deceleration, true);
-			newParticle.transform.SetParent(transform, false);
-
-			_liveParticles.Add(newParticle);
+				_liveParticles.Add(newParticle);
+			}
+			else
+            {
+				Debug.LogError("Could not spawn particle from it's pool");
+            }
 		}
 		#endregion Methods
 	}

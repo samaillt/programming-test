@@ -80,8 +80,7 @@
 		private void KillParticleAtIndex(int index)
 		{
 			Particle deadParticle = _liveParticles[index];
-			deadParticle.Hide();
-			ParticlePool.Instance.AddParticleToPool(deadParticle);
+			ObjectPooler.Instance.AddParticleToPool(deadParticle);
 			_liveParticles.RemoveAt(index);
 		}
 	}
