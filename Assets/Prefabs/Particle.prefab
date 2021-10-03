@@ -125,4 +125,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _colorChangeDurationMin: 0.3
   _colorChangeDurationMax: 1.5
+  _fadeOutDuration: 1
   _sprite: {fileID: 212265428691516404}
