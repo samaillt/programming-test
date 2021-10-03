@@ -5,10 +5,12 @@
 
 	public abstract class IParticleEmitter : MonoBehaviour
 	{
+		#region Fields
 		public int ParticleCount { get { return _liveParticles.Count; } }
-
 		public List<Particle> _liveParticles = new List<Particle>();
+		#endregion Fields
 
+		#region Methods
 		protected virtual void OnEnable()
 		{
 			try
@@ -83,5 +85,6 @@
 			ObjectPooler.Instance.AddParticleToPool(deadParticle);
 			_liveParticles.RemoveAt(index);
 		}
+		#endregion Methods
 	}
 }

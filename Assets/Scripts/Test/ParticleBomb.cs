@@ -5,7 +5,7 @@
 	public class ParticleBomb : IParticleEmitter
 	{
 		#region Fields
-		[SerializeField] private int _particleCount = 100;
+		[SerializeField] private int _particleToSpawn = 100;
 		[SerializeField] private float _deceleration = 10.0f;
 		[SerializeField] private float _minVelocity = 600.0f;
 		[SerializeField] private float _maxVelocity = 900.0f;
@@ -28,12 +28,12 @@
 
 		public void Explode()
 		{
-			for (int i = 0; i < _particleCount; i++)
+			for (int i = 0; i < _particleToSpawn; i++)
 			{
 				Particle newParticle;
 				if (ObjectPooler.Instance.TrySpawnParticle(out newParticle))
 				{
-					Vector3 particleDirection = Random.insideUnitCircle; // Note : only particleVelocity.X and particleVelocity.Y coordinates will be set with a value [-1; 1]
+					Vector3 particleDirection = Random.insideUnitCircle; // Note : only particleDirection.X and particleDirection.Y coordinates will be set with a value [-1; 1]
 
 					float particleLifespan = 2f;
 					Color particleInitialColor = Color.Lerp(_startColor, _endColor, Random.value);

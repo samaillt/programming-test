@@ -11,6 +11,7 @@
 		#region Fields
 		[SerializeField] private Text _info = null;
 		[SerializeField] private FpsCounter _fpsCounter = null;
+		[SerializeField] private float _pannelRefreshInterval = 0.01f;
 
 		private List<IParticleEmitter> _emitters = new List<IParticleEmitter>();
 		private static Main _instance = null;
@@ -43,7 +44,7 @@
 
 		private void Start()
 		{
-			StartCoroutine(UpdateInfo(1.0f));
+			StartCoroutine(UpdateInfo(_pannelRefreshInterval));
 		}
 
         private void FixedUpdate()
