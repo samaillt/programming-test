@@ -128,6 +128,6 @@ MonoBehaviour:
   _particleLifeMax: 4
   _particlesBySec: 100
   _maxAngle: 45
-  _particleMinVelocity: 10
-  _particleMaxVelocity: 150
+  _particleMinVelocity: 50
+  _particleMaxVelocity: 200
   _deceleration: 2

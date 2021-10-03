@@ -45,8 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _liveParticles: []
   _particleCount: 100
-  _deceleration: 1
-  _minVelocity: 500
-  _maxVelocity: 750
+  _deceleration: 5
+  _minVelocity: 200
+  _maxVelocity: 400
   _startColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _endColor: {r: 1, g: 0, b: 0, a: 1}
