@@ -43,12 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd01d4e702bf18c4486d35c9da2fee9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _liveParticles: []
   _particleCount: 100
-  _particlePrefab: {fileID: 114601819482752776, guid: b5df2edaa5a4b224eb3faec7a0b98c84,
-    type: 3}
   _deceleration: 1
-  _speedMin: 20
-  _speedMax: 200
+  _minVelocity: 500
+  _maxVelocity: 750
   _startColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _endColor: {r: 1, g: 0, b: 0, a: 1}
-  _liveParticles: []

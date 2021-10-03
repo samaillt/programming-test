@@ -123,12 +123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e2ea37f633adc47ae8612acffb2011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _liveParticles: []
   _particleLifeMin: 1
-  _particleLifeMax: 8
+  _particleLifeMax: 4
   _particlesBySec: 100
-  _particlePrefab: {fileID: 114601819482752776, guid: b5df2edaa5a4b224eb3faec7a0b98c84,
-    type: 3}
-  _maxAngle: 30
-  _particleSpeedMin: 10
-  _particleSpeedMax: 150
+  _maxAngle: 45
+  _particleMinVelocity: 10
+  _particleMaxVelocity: 150
   _deceleration: 2
